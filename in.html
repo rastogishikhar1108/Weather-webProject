@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Weather App</title>
+ <link rel="stylesheet" type="text/css" href="WW.css">
+ <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy" rel="stylesheet">
+</head>
+<body>
+
+<section>
+ 
+
+<h1>WHAT'S THE TEMPRATURE?</h1>
+ 
+ <div class="centerDiv">
+  <div class="details">
+   <label>ENTER CITY</label><br>
+   <input type="text" name="Your city" id="nameid" alt="city">
+  </div>
+
+  <div class="imgdiv">
+   <img src="new.png" width="129" height="129" id="im">
+   <h2 id="n"></h2>
+  </div>
+
+  <button onclick="cg()"> Click Me</button>
+  
+ </div>
+</section>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+<script>
+  function cg(){
+  var x = document.getElementById("nameid").value;
+  console.log(x);
+ fetch('http://api.openweathermap.org/data/2.5/weather?q='+x+'&appid=6886ec4cc5fa7f93a821e7f731b8f738&units=metric')
+  .then(response => response.json())
+  .then((data) =>{ document.getElementById("n").innerHTML=x+"&nbsp : &nbsp"+data.main.temp+" &degC";
+    var l=data.main.temp;
+        if(l<=15){document.getElementById("im").src='snow.png';}
+        else if(l>=16 && l<25){document.getElementById("im").src='rain.png';}
+        else{document.getElementById("im").src='sun.png';}
+})
+}
+</script>
+
+</body>
+</html>
